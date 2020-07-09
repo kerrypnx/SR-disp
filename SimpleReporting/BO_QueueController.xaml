@@ -1,0 +1,236 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="BO_QueueController" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1136,2194" sap2010:WorkflowViewState.IdRef="BO_QueueController_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="22">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="44">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.CV</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="BO_QueueController" sap:VirtualizedContainerService.HintSize="644,2029" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="s:String[]" Name="reportNameArr" />
+      <Variable x:TypeArguments="x:Boolean" Name="isMonthly" />
+      <Variable x:TypeArguments="x:Boolean" Name="isWeekly" />
+      <Variable x:TypeArguments="x:String" Name="runTime" />
+      <Variable x:TypeArguments="x:String" Name="companyCodeStr" />
+      <Variable x:TypeArguments="x:Boolean" Name="existMailTask" />
+      <Variable x:TypeArguments="x:String" Name="qName" />
+      <Variable x:TypeArguments="x:String" Name="projectStartTime" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <Assign sap:VirtualizedContainerService.HintSize="602,61" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign.To>
+        <OutArgument x:TypeArguments="s:String[]">[reportNameArr]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="s:String[]">[{"Commgt-ACG-PnL","Commgt-AR-Aging"}]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign sap:VirtualizedContainerService.HintSize="602,61" sap2010:WorkflowViewState.IdRef="Assign_2">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[qName]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[Simple_Reporting] BO Task Queue</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="602,1735" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[reportNameArr]">
+      <ui:ForEach.Body>
+        <ActivityAction x:TypeArguments="x:String">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:String" Name="reportName" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="566,1598" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <If Condition="[System.DateTime.Now.Day.ToString(&quot;dd&quot;) = &quot;08&quot; and reportName = &quot;Commgt-AR-Aging&quot;]" DisplayName="每月1号" sap:VirtualizedContainerService.HintSize="524,433" sap2010:WorkflowViewState.IdRef="If_4">
+              <If.Then>
+                <Sequence sap:VirtualizedContainerService.HintSize="376,280" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <Assign sap:VirtualizedContainerService.HintSize="334,61" sap2010:WorkflowViewState.IdRef="Assign_3">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[projectStartTime]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">[System.DateTime.Now.ToString("yyyyMM")+"08"]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="SimpleReporting\AddQueueItem.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="x:Boolean" x:Key="existMailTask">True</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="companyCodeStr">all</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="runTime">[runTime]</InArgument>
+                      <InArgument x:TypeArguments="x:Boolean" x:Key="isWeekly">[isWeekly]</InArgument>
+                      <InArgument x:TypeArguments="x:Boolean" x:Key="isMonthly">True</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="reportName">[reportName]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="SystemName">BO</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="qName">[qName]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="acceptEmail" />
+                      <InArgument x:TypeArguments="x:String" x:Key="projectStartTime">[projectStartTime]</InArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
+                </Sequence>
+              </If.Then>
+            </If>
+            <If Condition="[System.DateTime.Now.Day.ToString(&quot;dd&quot;) = &quot;01&quot;]" DisplayName="每月1号" sap:VirtualizedContainerService.HintSize="524,433" sap2010:WorkflowViewState.IdRef="If_2">
+              <If.Then>
+                <Sequence sap:VirtualizedContainerService.HintSize="376,280" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <Assign sap:VirtualizedContainerService.HintSize="334,61" sap2010:WorkflowViewState.IdRef="Assign_4">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[projectStartTime]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">[System.DateTime.Now.ToString("yyyyMM")+"01"]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="SimpleReporting\AddQueueItem.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="x:Boolean" x:Key="existMailTask">True</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="companyCodeStr">all</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="runTime">[runTime]</InArgument>
+                      <InArgument x:TypeArguments="x:Boolean" x:Key="isWeekly">[isWeekly]</InArgument>
+                      <InArgument x:TypeArguments="x:Boolean" x:Key="isMonthly">True</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="reportName">[reportName]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="SystemName">BO</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="qName">[qName]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="acceptEmail" />
+                      <InArgument x:TypeArguments="x:String" x:Key="projectStartTime">[projectStartTime]</InArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
+                </Sequence>
+              </If.Then>
+            </If>
+            <If Condition="[cint(System.DateTime.Now.DayOfWeek) = 5]" DisplayName="星期五" sap:VirtualizedContainerService.HintSize="524,433" sap2010:WorkflowViewState.IdRef="If_3">
+              <If.Then>
+                <Sequence sap:VirtualizedContainerService.HintSize="376,280" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <Assign sap:VirtualizedContainerService.HintSize="334,61" sap2010:WorkflowViewState.IdRef="Assign_5">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[projectStartTime]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">[System.DateTime.Now.ToString("yyyyMMdd")]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="SimpleReporting\AddQueueItem.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="x:Boolean" x:Key="existMailTask">True</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="companyCodeStr">all</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="runTime">[runTime]</InArgument>
+                      <InArgument x:TypeArguments="x:Boolean" x:Key="isWeekly">True</InArgument>
+                      <InArgument x:TypeArguments="x:Boolean" x:Key="isMonthly">False</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="reportName">[reportName]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="SystemName">BO</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="qName">[qName]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="acceptEmail" />
+                      <InArgument x:TypeArguments="x:String" x:Key="projectStartTime">[projectStartTime]</InArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
+                </Sequence>
+              </If.Then>
+            </If>
+            <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Workflow File" sap:VirtualizedContainerService.HintSize="524,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="SimpleReporting\AddQueueItem.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="x:Boolean" x:Key="existMailTask">
+                  <Literal x:TypeArguments="x:Boolean" Value="True" />
+                </InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="companyCodeStr">
+                  <Literal x:TypeArguments="x:String">all</Literal>
+                </InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="runTime">
+                  <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="runTime" />
+                </InArgument>
+                <InArgument x:TypeArguments="x:Boolean" x:Key="isWeekly">
+                  <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="isWeekly" />
+                </InArgument>
+                <InArgument x:TypeArguments="x:Boolean" x:Key="isMonthly">
+                  <Literal x:TypeArguments="x:Boolean" Value="True" />
+                </InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="reportName">
+                  <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="reportName" />
+                </InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="SystemName">
+                  <Literal x:TypeArguments="x:String">BO</Literal>
+                </InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="qName">
+                  <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="qName" />
+                </InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="acceptEmail" />
+                <InArgument x:TypeArguments="x:String" x:Key="projectStartTime">
+                  <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="System.DateTime.Now.ToString(&quot;yyyyMM&quot;)+&quot;01&quot;" />
+                </InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEach.Body>
+    </ui:ForEach>
+  </Sequence>
+</Activity>
